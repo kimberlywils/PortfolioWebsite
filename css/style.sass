@@ -1,0 +1,744 @@
+/* fonts */
+$muli: 'Muli', sans-serif
+$opensans: 'Open Sans Condensed', sans-serif
+
+/* colors */
+$red: #fb3415
+$orange: #fe6a2c
+$peach: #feab69
+$pale: #ffe5b6
+$green: #6fada2
+$teal: #008e9c
+$blue: #00698d
+$deep: #011f53
+$dark: #313538
+$black: #222222
+
+/* media */
+$medium: 900px
+$small: 640px
+$mobile: 450px
+
+%center-children
+	display: flex
+	justify-content: center
+	align-items: center
+
+html
+	scroll-behavior: smooth
+
+body
+	margin: 0
+	padding: 0
+	font-family: $muli
+	color: #fff
+	font-weight: 300
+	background-color: $dark
+
+.body-load
+	.body-bg-overlay, .nav-rotate, .nav-mobile, .page
+		opacity: 0
+
+.body-lock
+	overflow: hidden
+
+.body-bg-overlay
+	width: 100vw
+	height: 120vh
+	position: fixed
+	top: 0
+	left: 0
+	background-image: url(../imgs/bg-noise.png)
+	animation: 1s opacity ease forwards
+	z-index: 0
+
+@keyframes opacity
+	0%, 10%
+		opacity: 0
+	100%
+		opacity: .5
+@media (max-width: $mobile)
+	@keyframes opacity
+		0%, 10%
+			opacity: 0
+		100%
+			opacity: .85
+	
+h1, h2, h3, h4, h5, p, ol, ul, img
+	margin: unset
+	position: relative
+	
+a
+	color: #fff
+	text-decoration: none
+
+.nav-rotate
+	width: 100px
+	height: 100px
+	position: fixed
+	top: 20px
+	right: 20px
+	border-radius: 50%
+	box-sizing: border-box
+	border: 20px solid $peach
+	z-index: 3
+	animation: 1s rotate-slide linear
+	@media (max-width: $mobile)
+		width: 180px
+		height: 180px
+		right: -90px
+		top: -90px
+		background: $peach
+		padding: 5px
+		border: 5px solid $pale
+
+@keyframes rotate-slide
+	0%
+		transform: rotate(0deg)
+	100%
+		transform: rotate(360deg)
+
+.nav
+	width: 94px
+	height: 94px
+	@extend %center-children
+	position: fixed
+	top: -17px
+	left: -17px
+	border-radius: 50%
+	transform: rotate(-30deg)
+	@media (max-width: $mobile)
+		width: 100%
+		height: 100%
+		top: unset
+		left: unset
+		position: relative
+		transform: rotate(90deg)
+	.nav-group
+		height: 100%
+		position: absolute
+		border-radius: 50%
+		a
+			width: 50%
+			height: 50%
+			font-size: 14px
+			font-weight: 900
+			color: $black
+			text-transform: uppercase
+			position: absolute
+			right: 0px
+			text-decoration: none
+			@media (max-width: $mobile)
+				font-size: 25px
+				font-weight: 800
+				color: $pale
+				bottom: 0
+			span
+				width: 14px
+				height: 100%
+				position: absolute
+				left: -7px
+				line-height: 14px
+				transform-origin: bottom
+				display: flex
+				justify-content: center
+				align-items: flex-start
+				text-align: center
+				transition: line-height 1s
+				transition-timing-function: ease
+				@media (max-width: $mobile)
+					width: 20px
+					left: -10px
+					line-height: 20px
+					transform-origin: top
+					display: flex
+					justify-content: center
+					align-items: flex-end
+			.mark
+				@media (max-width: $mobile)
+					opacity: 0
+		a:hover
+			color: $orange
+	.active-group
+			a
+				color: $pale
+				@media (max-width: $mobile)
+					color: $black
+
+.nav-mobile
+	display: none
+	@extend %center-children
+	@media (max-width: $mobile)
+		width: 180px
+		height: 180px
+		position: fixed
+		right: -90px
+		top: -90px
+		cursor: pointer
+		display: block
+		z-index: 4
+		.fa-bars
+			width: 20px
+			height: 20px
+			font-size: 20px
+			color: $pale
+			position: relative
+			top: 55%
+			left: 35%
+		.fa-times
+			width: 45px
+			height: 40px
+			font-size: 30px
+			top: 55%
+			left: 25%
+			text-align: center
+
+@media (max-width: $mobile)
+	%no-rotate
+		transform: rotate(0deg)!important
+		border-radius: 0
+
+	%unset
+		height: unset
+		position: unset
+
+	.nav-mobile-show
+		@extend %no-rotate
+		width: 100vw
+		height: 100vh
+		position: fixed
+		top: 0
+		left: 0
+		.nav
+			@extend %no-rotate
+			flex-direction: column
+			.nav-group
+				@extend %no-rotate, %unset
+				width: 100%
+				transition: height 0s
+				a
+					@extend %unset
+					width: 100%
+					font-size: 18vw
+					display: flex
+					justify-content: space-between
+					box-sizing: border-box
+					padding: 2vw 6vw
+					transition: .35s
+					transition-timing-function: ease
+					span
+						@extend %no-rotate, %unset
+						width: auto
+						line-height: 18vw
+						transition: font-size .5s
+					.blank, .mark
+						display: none
+.page-nav
+	width: 100%
+	height: 40px
+	position: fixed
+	top: 0
+	left: 0
+	z-index: 2
+	@media (max-width: $mobile)
+		background-image: url(../imgs/bg-noise.png)
+	a
+		width: 90px
+		height: 100%
+		font-size: 15px
+		font-weight: 800
+		color: $peach
+		text-transform: uppercase
+		letter-spacing: 1px
+		display: flex
+		align-items: center
+		justify-content: space-between
+		box-sizing: border-box
+		padding: 0 15px
+	a:hover
+		color: $orange
+
+.page
+	width: 100vw
+	min-height: 100vh
+	@extend %center-children
+	flex-direction: column
+	box-sizing: border-box
+	padding: 20px
+	overflow: hidden
+	@media (max-width: $mobile)
+		min-height: unset
+		padding: 0 20px
+	.row
+		width: 100%
+		max-width: 850px
+	h1
+		font-family: $opensans
+		font-size: 100pt
+		line-height: 115px
+		font-weight: 800
+		text-shadow: 2px 2px $orange, 5px 2px $peach
+		text-transform: uppercase
+		letter-spacing: 1px
+		word-spacing: -8px
+		white-space: nowrap
+		@media (max-width: $medium)
+			font-size: 75pt
+			line-height: 90px
+		@media (max-width: $mobile)
+			font-size: 20vw
+			line-height: 18vw
+	h2
+		position: relative
+		font-family: $opensans
+		font-size: 72px
+		font-weight: 800
+		color: $peach
+		text-transform: uppercase
+		letter-spacing: 1px
+		word-spacing: -5px
+		line-height: 72px
+		white-space: nowrap
+		@media (max-width: $mobile)
+			font-size: 15vw
+			line-height: 15vw
+	h3
+		font-size: 25px
+		font-weight: 400
+		text-transform: uppercase
+		letter-spacing: 5px
+		word-spacing: 5px
+		line-height: 50px
+		text-align: center
+		white-space: nowrap
+		@media (max-width: $mobile)
+			font-size: 20px
+			line-height: 40px
+	h4
+		font-family: $opensans
+		font-size: 36px
+		font-weight: 800
+		letter-spacing: 1px
+		@media (max-width: $medium)
+			font-size: 30px
+		@media (max-width: $mobile)
+			font-size: 6vw
+	p
+		max-width: 400px
+		font-size: 16px
+		font-weight: 400
+		line-height: 28px
+		white-space: normal
+		margin: 0 0 15px 0
+		em
+			color: $peach
+			font-size: 14px
+			font-weight: 600
+			font-style: normal
+	b
+		font-size: 15px
+		font-weight: 800
+		color: #feab69
+		letter-spacing: .5px
+		text-transform: uppercase
+	ol
+		width: 100%
+		font-family: $muli
+		font-size: 18px
+		font-weight: 300
+		letter-spacing: 1px
+		word-spacing: 2px
+		list-style-type: none
+		line-height: 30px
+		position: relative
+		box-sizing: border-box
+		padding: 20px 10px
+		white-space: nowrap
+		@media (max-width: $mobile)
+			font-size: 4.5vw
+			line-height: 9vw
+			padding: 20px 0
+		li
+			margin: 0 0 0 45px
+		li::before
+			width: 30px
+			font-family: $opensans
+			font-size: 10px
+			text-transform: uppercase
+			position: absolute
+			text-align: right
+			letter-spacing: 1px
+			margin: 0 0 0 -45px
+		li:nth-of-type(1):before
+			content: 'i.'
+		li:nth-of-type(2):before
+			content: 'ii.'
+		li:nth-of-type(3):before
+			content: 'iii.'
+		li:nth-of-type(4):before
+			content: 'iv.'
+		li:nth-of-type(5):before
+			content: 'v.'
+		li:nth-of-type(6):before
+			content: 'vi.'
+		li:nth-of-type(7):before
+			content: 'vii.'
+		li:nth-of-type(8):before
+			content: 'viii.'
+		li:nth-of-type(9):before
+			content: 'ix.'
+
+.home-page
+	@media (max-width: $mobile)
+		height: 700px
+		justify-content: flex-start
+	.row
+		height: 625px
+		display: flex
+		flex-direction: column
+		position: relative
+		@media (max-width: $mobile)
+			max-width: unset
+			height: auto
+			position: unset
+		.col-1
+			margin: auto
+			h1
+				font-size: 120pt
+				line-height: 135px
+				@media (max-width: $mobile)
+					font-size: 26vw
+					line-height: 26vw
+			@media (max-width: $mobile)
+				margin: 0
+				box-sizing: border-box
+				padding: 10vw 2vw 2vw 2vw
+			.h1-1
+				animation: 2s slide-right ease !important
+			.h1-2
+				animation: 2.5s slide-right ease !important
+		.col-2
+			width: 340px
+			position: relative
+			margin: auto 0 auto auto
+			box-sizing: border-box
+			padding: 10px 8px
+			animation: 2s slide-right ease !important
+			@media (max-width: $mobile)
+				width: 300px
+				background: none
+				margin: auto
+				text-align: center
+				padding: 0
+				h2
+					font-size: 68px
+					line-height: 68px
+					text-align: left
+			.h3-2
+				font-family: $opensans
+				font-size: 52px
+				font-weight: 800
+				letter-spacing: 1px
+				word-spacing: 0
+				@media (max-width: $mobile)
+					font-size: 48px
+					line-height: 48px
+		img
+			position: absolute
+			top: 20px
+			filter: grayscale(1)
+			animation: 2s slide-left ease !important
+			@media (max-width: $mobile)
+				top: -25vw !important
+				width: 100%
+				position: relative
+		.img-2
+			top: 319px
+			animation: 2.5s slide-left ease !important
+			@media (max-width: $mobile)
+				margin: 0 0 -100% 0
+	
+@keyframes slide-left
+	0%, 20%
+		left: 200%
+	100%
+		left: 0
+@keyframes slide-right
+	0%, 20%
+		left: -200%
+	100%
+		left: 0
+
+.about-page
+	@media (max-width: $mobile)
+		height: 800px
+	.row
+		@extend %center-children
+		margin: 150px 0 50px 0
+		@media (max-width: $mobile)
+			margin: 50px 0 0 0
+		.col-2
+			max-width: 470px
+			@media (max-width: $medium)
+				max-width: 360px
+		.col-3
+			margin: 0 auto
+	.row-2
+		align-items: flex-end
+		flex-wrap: nowrap !important
+		margin: 25px 0 0 0
+
+.work-page
+	height: 100vh
+	min-height: 750px
+	position: relative
+	@media (max-width: $small)
+		height: 700px
+		min-height: unset
+	.row
+		position: relative
+		z-index: 1
+		@media (max-width: $mobile)
+			margin: 100px 0 0 0
+	.row-2
+		flex-wrap: nowrap
+		margin: 25px 0 0 0
+		ol
+			li
+				font-size: 34px
+				font-weight: 600
+				line-height: 80px
+				@media (max-width: $medium)
+					font-size: 30px
+					line-height: 70px
+				@media (max-width: $small)
+					font-size: 26px
+					line-height: 60px
+				@media (max-width: $mobile)
+					font-size: 6.5vw
+					margin: 15px 0 65px 40px
+				a
+					padding: 0 0 4px 0
+					cursor: pointer
+					@media (max-width: $mobile)
+						border-bottom: 4px solid $peach
+				.active-work-link
+					border-bottom: 4px solid $peach
+					transition: .25s
+	.img-display
+		@media (max-width: $mobile)
+			width: 75%
+			position: absolute
+			bottom: 0
+		img
+			position: absolute
+			z-index: -1
+			@media (max-width: $mobile)
+				width: 100% !important
+				max-width: unset !important
+				min-width: unset !important
+				position: relative
+		.img-animate
+			animation: img-animate .5s linear
+		img:first-of-type
+			width: 18%
+			max-width: 230px
+			min-width: 150px
+			top: 50px
+			left: 20px
+			@media (max-width: $mobile)
+				top: 20px
+		img:nth-of-type(2)
+			width: 50%
+			max-width: 650px
+			min-width: 360px
+			top: 30%
+			right: 20px
+			@media (max-width: $mobile)
+				top: unset
+		img:nth-of-type(3)
+			width: 30%
+			max-width: 390px
+			min-width: 220px
+			bottom: 20px
+			left: 20px
+
+.work-sub-page
+	height: 100vh
+	min-height: unset
+	overflow-y: scroll
+	@media (max-width: $mobile)
+		justify-content: flex-start
+	.row-2
+		@media (max-width: $mobile)
+		margin: 20px 0 0 0
+		ol
+			li
+				font-size: 26px
+				line-height: 60px
+				margin: 0 0 0 45px
+				@media (max-width: $mobile)
+	h4
+		@media (max-width: $mobile)
+			font-size: 10vw
+	.img-display
+		@media (max-width: $mobile)
+			bottom: unset
+			top: 150px
+		img:first-of-type
+			display: none
+			@media (max-width: $mobile)
+				display: block
+		img:nth-of-type(2)
+			top: unset
+			bottom: 20px
+			@media (max-width: $mobile)
+				bottom: unset
+		img:nth-of-type(3)
+			top: 20px
+			left: unset
+			right: 20px
+			@media (max-width: $mobile)
+				top: unset
+				left: 20px
+				
+@keyframes img-animate
+	0%
+		opacity: .75
+		transform: rotate(0deg) scale(.9)
+	50%
+		transform: rotate(.5deg)
+	100%
+		opacity: 1
+		transform: rotate(0deg) scale(1)
+
+.work-sub-page-2
+	.nav-mobile-subpage
+		width: 0
+		height: 0
+	.work-links .active-work-link+div
+		height: auto
+	.work-links a+div
+		height: 0px
+		position: absolute
+		top: 20px
+		margin: 0 0 0 280px
+		background: #313538
+		box-sizing: border-box
+		padding: 15px 20px 0 20px
+		overflow: hidden
+		transition: .5s
+		@media (max-width: $mobile)
+			height: auto
+			position: relative
+			top: 0
+			margin: 0
+			background: none
+
+.atria-page
+	padding: 100px 20px 20px 20px
+	@media (max-width: $mobile)
+		padding: 20px
+	h4
+		font-size: 48px
+		margin: 90px 0 0 0
+		@media (max-width: $mobile)
+			font-size: 8vw
+			margin: 50px 0 0 0
+	h3
+		font-size: 16px
+		letter-spacing: 1px
+		word-spacing: 1px
+		line-height: 30px
+		text-transform: unset
+	.atria-screens-display
+		width: 100%
+		display: flex
+		justify-content: flex-start
+		margin: 10px 0
+		box-sizing: border-box
+		padding: 20px
+		overflow-y: scroll
+		img
+			width: 90%
+			max-width: 900px
+			margin: 0 30px 0 0
+			border-radius: 5px
+			box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5)
+			@media (max-width: $mobile)
+				width: 270px
+				height: 156px
+				margin: 0 20px 0 0
+	.atria-screens-mobile
+		img
+			max-width: 280px
+			box-shadow: none
+			@media (max-width: $mobile)
+				width: 270px
+				height: 540px
+
+
+.contact-page
+	min-height: 100vh
+	@media (max-width: $mobile)
+		height: 800px
+	.row
+		@extend %center-children
+		.col-2
+			max-width: 560px
+			@media (max-width: $medium)
+				max-width: 440px
+			h2
+				margin: 20px 0 0 0
+			a
+				font-size: 22px
+				font-weight: 400
+				letter-spacing: 1px
+				word-spacing: 2px
+				list-style-type: none
+				line-height: 30px
+				display: inline-block
+				position: relative
+				color: #fff
+				background: #222
+				margin: 10px 5px 0 0
+				box-sizing: border-box
+				padding: 0px 5px
+				@media (max-width: $mobile)
+					font-size: 5vw
+				i
+					margin: 0 5px 0 0
+			a:hover
+				background: $orange
+	
+.about-page, .work-page, .contact-page
+	.row
+		@media (max-width: $small)
+			flex-wrap: wrap
+		.col-1
+			@media (max-width: $medium)
+				margin: 0 auto
+			@media (max-width: $small)
+				margin: 0 auto 0 0
+		.col-2
+			width: 100%
+			position: relative
+			box-sizing: border-box
+			padding: 30px
+			@media (max-width: $medium)
+				margin: 0 auto 0 0
+				padding: 10px
+			@media (max-width: $mobile)
+				max-width: 75vw
+				padding: 2vw
+		h2
+			@media (max-width: $medium)
+				font-size: 60px
+				line-height: 60px
+			@media (max-width: $small)
+				font-size: 48px
+				line-height: 48px
+			@media (max-width: $mobile)
+				font-size: 9.5vw
+				line-height: 10vw
+				letter-spacing: 2px
