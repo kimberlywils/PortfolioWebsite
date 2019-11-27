@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="title" content="Kim Wilson - Front End Developer and UI / UX Designer">
+	<meta name="description" content="Compact code that bridges the gap between ideation and implementation.">
+	
+	<meta name="image" content="imgs/main-bottom.png">
+	<meta name="url" content="https://itskimwilson.com/">
+	
+	<meta name="keywords" content="web, website, websites, app, web app, develop, developer, design, designer, code, front end, frontend, front end development, front end developer, user interface, user experience, ui, ux, html, html5, css, css3, sass, flexbox, javascript, jquery, react, react.js">
+	<meta name="robots" content="index, follow">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="language" content="English">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="icon" type="image/png" sizes="32x32" href="../imgs/favico.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../imgs/favico.png">
+
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800,900|family=Open+Sans:400,600,700,800|Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/635700ab10.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<aside class='bg'></aside>
+	
+	<nav class='sub'>
+		<a href='../#work'>
+			<i class="fas fa-caret-left"></i>Back
+		</a>
+	</nav>
+	<nav class='sub mobile'></nav>
+
+	<main id='work' class='sub'>
+		<section>
+			<div>
+				<h4>Freelance &amp; Wordpress Work</h4>
+			</div>
+		</section>
+		<section>
+			<ol class='links desc'>
+				<li>
+					<a class='active' href='./atria-anon'>Atria &amp; Anon</a>
+					<div>
+						<p>Two Web Apps bringing people together in the most important ways.</p>
+						<p><b>My Role:</b> UI / UX Designer (site map, wireframe, mock-up), and Front End Developer (HTML, CSS, Javascript).</p>
+					</div>
+				</li>
+				<li>
+					<a href='https://www.grubonmain.ca' target='_blank'>Grub</a>
+					<div>
+						<p>Grub was a website created in Wordpress for a local Vancouver restaurant.</p>
+						<p><b>My Role:</b> Web &amp; Graphic Designer (wireframe, mock-up, custom graphics, Wordpress development)</p>
+					</div>
+				</li>
+				<li>
+					<a href='https://dyrand.com/industries/finance/' target='_blank'>Dyrand Systems</a>
+					<div>
+						<p>Dyrand needed a single page of their Wordpress website updated to be more appealing to potential clients.</p>
+						<p><b>My Role:</b> Web &amp; Graphic Designer (mock-up, custom graphics, Wordpress development / update)</p>
+					</div>
+				</li>
+			</ol>
+		</section>
+		<aside class='img'>
+			<img src='../imgs/Atria/logo.png'>
+			<img src='../imgs/Atria/text.png'>
+			<img src='../imgs/Atria/main.png'>
+		</aside>
+	</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<script>
+		
+		const imgDis = document.querySelectorAll('aside.img img');
+		const workLink = document.querySelectorAll('ol.links li a');
+
+		const navMobile = document.querySelector('nav.mobile'),
+			  navMobileStyle = window.getComputedStyle(navMobile),
+			  navMobileTrue = navMobileStyle.getPropertyValue('display');
+
+		workLinkMobile = () => {
+			if (navMobileTrue == 'block'){
+				imgDis[0].src = '../imgs/Atria/main.png';
+				imgDis[1].src = '../imgs/Grub/logo.png';
+				imgDis[2].src = '';
+			};
+		};
+		
+		workLinkMobile();
+
+		workLinkHover = (index, srcOld, srcNew) => {
+			if (navMobileTrue !== 'block'){
+				for (let i = 0; i < 3; i++) {
+					if (i == index) {
+						workLink[i].classList.add('active');
+					} else {
+						workLink[i].classList.remove('active');
+					}
+					imgDis[i].src = imgDis[i].getAttribute('src').replace(srcOld, srcNew);
+					imgDis[i].classList.add('animate');
+					workLink[i].onmouseout = () => {
+						for (let i = 0; i < 3; i++) {
+							imgDis[i].classList.remove('animate');
+						};
+					};
+				};
+			};
+		};
+
+		workLink[0].onmouseover = () => {
+			workLinkHover(0, /Grub|Dyrand/, 'Atria');
+		};
+		workLink[1].onmouseover = () => {
+			workLinkHover(1, /Atria|Dyrand/, 'Grub');
+		};
+		workLink[2].onmouseover = () => {
+			workLinkHover(2, /Atria|Grub/, 'Dyrand');
+			imgDis[0].src = '../imgs/Atria/logo.png';
+		};
+
+		window.onresize = function() {
+			workLinkMobile();
+		};
+
+	</script>
+
+</body>
+
+</html>
